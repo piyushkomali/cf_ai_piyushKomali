@@ -1,0 +1,29 @@
+# Cloudflare Workers Configuration
+# AI-Powered Collaborative Shopping List
+
+name = "cf-ai-shopping-list"
+main = "src/worker.js"
+compatibility_date = "2024-10-01"
+account_id = "eee08042a2fa8dd7724d08b5e19c8bdf"
+
+# Durable Objects Configuration
+[[durable_objects.bindings]]
+name = "SHOPPING_LIST"
+class_name = "ShoppingList"
+script_name = "cf-ai-shopping-list"
+
+# Durable Objects Migration (for free plan)
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ShoppingList"]
+
+# Workers AI Binding
+[ai]
+binding = "AI"
+remote = true
+
+# Assets binding for serving the frontend
+# This allows the Worker to serve static files from the public directory
+[assets]
+directory = "./public"
+binding = "ASSETS"

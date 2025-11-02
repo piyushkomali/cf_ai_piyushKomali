@@ -1,0 +1,8 @@
+PROMPTS.md
+node_modules/
+.env
+.DS_Store
+.wrangler/
+help.md
+README.md
+.gitignore
