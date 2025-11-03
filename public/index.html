@@ -143,7 +143,7 @@
         console.log('Connected to shopping list');
         connectionStatus.innerHTML = `
           <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>
-          Connected
+          Connected<span id="sessionCountDisplay" class="ml-1 "></span>
         `;
         connectionStatus.className = 'mt-4 inline-block px-4 py-2 rounded-full text-sm font-medium bg-green-900 text-green-200';
       };
@@ -151,9 +151,16 @@
       socket.onmessage = (event) => {
         try {
           const message = JSON.parse(event.data);
+          console.log('Event:', event);
           
           if (message.type === 'updatedList') {
             renderList(message.data);
+          } else if (message.type === 'sessionCount') {
+            console.log('Session count:', message.data);
+            const sessionCountDisplay = document.getElementById('sessionCountDisplay');
+            if (sessionCountDisplay) {
+              sessionCountDisplay.textContent = ` - ${message.data} users active`;
+            }
           } else if (message.type === 'error') {
             showAIStatus(message.message, 'error');
           }
@@ -166,7 +173,7 @@
         console.log('Disconnected. Retrying...');
         connectionStatus.innerHTML = `
           <span class="inline-block w-2 h-2 rounded-full bg-red-500 mr-2"></span>
-          Disconnected
+          Disconnected<span id="sessionCountDisplay" class="ml-1 text-gray-400"></span>
         `;
         connectionStatus.className = 'mt-4 inline-block px-4 py-2 rounded-full text-sm font-medium bg-red-900 text-red-200';
         

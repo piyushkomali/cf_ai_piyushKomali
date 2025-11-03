@@ -17,6 +17,8 @@ export class ShoppingList {
     webSocket.accept();
 
     this.sessions.push(webSocket);
+    console.log("sessions", this.sessions);
+    await this.updateSessionCountUI();
 
     webSocket.send(JSON.stringify({
       type: "updatedList",
@@ -36,12 +38,16 @@ export class ShoppingList {
       }
     });
 
-    webSocket.addEventListener("close", () => {
+    webSocket.addEventListener("close", async () => {
       this.sessions = this.sessions.filter(session => session !== webSocket);
+      await this.updateSessionCountUI();
+      console.log("sessions after close", this.sessions);
     });
 
-    webSocket.addEventListener("error", () => {
+    webSocket.addEventListener("error", async () => {
       this.sessions = this.sessions.filter(session => session !== webSocket);
+      await this.updateSessionCountUI();
+      console.log("sessions after error", this.sessions);
     });
   }
 
@@ -56,6 +62,14 @@ export class ShoppingList {
         return false;
       }
     });
+  }
+
+
+  async updateSessionCountUI() {
+    this.broadcast(JSON.stringify({
+      type: "sessionCount",
+      data: this.sessions.length
+    }));
   }
 
   async updateAndBroadcast() {
@@ -115,7 +129,6 @@ export class ShoppingList {
 
   async fetch(request) {
     const url = new URL(request.url);
-
     if (request.headers.get("Upgrade") === "websocket") {
       const pair = new WebSocketPair();
       await this.handleSession(pair[1]);
@@ -127,6 +140,8 @@ export class ShoppingList {
     }
 
     if (request.method === "GET" && url.pathname === "/") {
+      console.log("GET", this.items);
+      console.log("GET", this.sessions.length);
       return new Response(JSON.stringify({
         items: this.items,
         sessions: this.sessions.length

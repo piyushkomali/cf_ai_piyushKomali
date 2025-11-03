@@ -58,9 +58,6 @@ Examples:
 
         try {
 
-          console.log("RT", typeof responseText);
-          console.log("RT", responseText);
-
         } catch (err) {
           console.error("Failed to parse AI response:", responseText, err);
 

@@ -12,6 +12,7 @@ name = "SHOPPING_LIST"
 class_name = "ShoppingList"
 script_name = "cf-ai-shopping-list"
 
+
 # Durable Objects Migration (for free plan)
 [[migrations]]
 tag = "v1"
@@ -20,10 +21,31 @@ new_sqlite_classes = ["ShoppingList"]
 # Workers AI Binding
 [ai]
 binding = "AI"
-remote = true
+
 
 # Assets binding for serving the frontend
 # This allows the Worker to serve static files from the public directory
 [assets]
 directory = "./public"
 binding = "ASSETS"
+
+# Preview environment for testing
+[env.preview]
+name = "cf-ai-shopping-list-preview"
+
+[env.preview.ai]
+binding = "AI"
+remote = true
+
+[env.preview.assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[env.preview.durable_objects.bindings]]
+name = "SHOPPING_LIST"
+class_name = "ShoppingList"
+script_name = "cf-ai-shopping-list-preview"
+
+[[env.preview.migrations]]
+tag = "v1"
+new_sqlite_classes = ["ShoppingList"]
