@@ -17,7 +17,6 @@ export class ShoppingList {
     webSocket.accept();
 
     this.sessions.push(webSocket);
-    console.log("sessions", this.sessions);
     await this.updateSessionCountUI();
 
     webSocket.send(JSON.stringify({
@@ -41,13 +40,11 @@ export class ShoppingList {
     webSocket.addEventListener("close", async () => {
       this.sessions = this.sessions.filter(session => session !== webSocket);
       await this.updateSessionCountUI();
-      console.log("sessions after close", this.sessions);
     });
 
     webSocket.addEventListener("error", async () => {
       this.sessions = this.sessions.filter(session => session !== webSocket);
       await this.updateSessionCountUI();
-      console.log("sessions after error", this.sessions);
     });
   }
 

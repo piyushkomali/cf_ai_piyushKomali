@@ -2,7 +2,7 @@
 import { ShoppingList } from './durable-object.js';
 
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env) {
     const url = new URL(request.url);
 
     const id = env.SHOPPING_LIST.idFromName("default-list");
@@ -64,7 +64,7 @@ Examples:
         }
 
         if (responseText.length > 0) {
-          const doRequest = new Request("http://durable-object/", {
+          const request = new Request("http://durable-object/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -73,7 +73,7 @@ Examples:
             })
           });
 
-          await stub.fetch(doRequest);
+          await stub.fetch(request);
         }
 
         return new Response(JSON.stringify({

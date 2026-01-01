@@ -137,6 +137,7 @@
 
     function connectWebSocket() {
       const wsUrl = location.origin.replace(/^http/, 'ws') + '/ws';
+      console.log("wsUrl", wsUrl);
       socket = new WebSocket(wsUrl);
 
       socket.onopen = () => {
