@@ -22,6 +22,10 @@ new_sqlite_classes = ["ShoppingList"]
 [ai]
 binding = "AI"
 
+[observability]
+[observability.logs]
+enabled = false
+invocation_logs = true
 
 # Assets binding for serving the frontend
 # This allows the Worker to serve static files from the public directory
@@ -35,8 +39,6 @@ name = "cf-ai-shopping-list-preview"
 
 [env.preview.ai]
 binding = "AI"
-remote = true
-
 [env.preview.assets]
 directory = "./public"
 binding = "ASSETS"
