@@ -11,7 +11,6 @@ export class ShoppingList {
       this.items = stored || [];
     });
   }
-
   async handleSession(webSocket) {
 
     webSocket.accept();
@@ -81,7 +80,6 @@ export class ShoppingList {
 
   async handleMessage(message) {
     const { action, payload } = message;
-
     switch (action) {
       case "addItem":
 
@@ -137,8 +135,6 @@ export class ShoppingList {
     }
 
     if (request.method === "GET" && url.pathname === "/") {
-      console.log("GET", this.items);
-      console.log("GET", this.sessions.length);
       return new Response(JSON.stringify({
         items: this.items,
         sessions: this.sessions.length

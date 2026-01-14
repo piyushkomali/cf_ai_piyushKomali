@@ -72,7 +72,6 @@ Examples:
               payload: responseText
             })
           });
-
           await stub.fetch(request);
         }
 
