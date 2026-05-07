@@ -41,5 +41,7 @@ pnpm dev --port 3000
 ### Key Gotchas
 
 - The Durable Object binding in `wrangler.toml` uses `script_name = "cf-ai-shopping-list"` (self-reference). Wrangler shows `[not connected]` in local mode, but the DO still works locally.
-- The AI binding always accesses remote Cloudflare resources. Set `CLOUDFLARE_API_TOKEN` to a valid token if you need to test AI-powered ingredient extraction.
+- The AI binding always accesses remote Cloudflare resources. If `CLOUDFLARE_API_TOKEN` is set in the environment (injected as a secret), use it directly: `npx wrangler dev --port 8787 --show-interactive-dev-session false`. If not available, prefix with `CLOUDFLARE_API_TOKEN=dummy` to bypass OAuth and run without AI.
+- The `account_id` in `wrangler.toml` is hardcoded to the repo owner's account. The provided `CLOUDFLARE_API_TOKEN` must have permissions on that account for AI features to work.
 - The Next.js project uses Turbopack by default in dev mode.
+- An `[ERROR]` about `/accounts/.../workers/subdomain/edge-preview` on startup is harmless and does not affect local dev — it's an edge-preview feature that requires full account access.
