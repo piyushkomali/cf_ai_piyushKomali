@@ -6,3 +6,5 @@ node_modules/
 help.md
 README.md
 .gitignore
+.next
+next-env.d.ts

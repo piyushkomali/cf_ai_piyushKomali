@@ -56,13 +56,6 @@ Examples:
           // AI response always return JSON array of strings without needing to parse it which caused prior errors
         let responseText = aiResponse.response || "";
 
-        try {
-
-        } catch (err) {
-          console.error("Failed to parse AI response:", responseText, err);
-
-        }
-
         if (responseText.length > 0) {
           const request = new Request("http://durable-object/", {
             method: "POST",
@@ -72,7 +65,6 @@ Examples:
               payload: responseText
             })
           });
-
           await stub.fetch(request);
         }
 
