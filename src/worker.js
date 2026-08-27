@@ -23,7 +23,7 @@ export default {
           });
         }
 
-        const aiResponse = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+        const aiResponse = await env.AI.run("@cf/meta/llama-4-scout-17b-16e-instruct", {
           messages: [
             {
               role: "system",
@@ -117,4 +117,3 @@ Examples:
 };
 
 export { ShoppingList };
-
