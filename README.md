@@ -6,6 +6,7 @@
 
 # real-time collaborative shopping list with AI enhancement
 
+
 ## what the application does
 
 the application allows different clients/user to manage a SINGLE shopping list instance in real-time with the help of AI. using natural language users can simply add one item of their choice, remove an item, clear the list or use a more complex AI enhancement tool to add multiple items based on their prompt. The Workers backend with Workers AI and Durable Objects takes prompts like recipes, cuisines or anything the user thinks of and breaks it down into a JSON array of items via a system prompt.
