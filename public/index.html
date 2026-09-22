@@ -60,6 +60,9 @@
             <li>• <span class="text-purple-400 font-mono">I am making Mexican food tonight, give me some items for tacos</span> - AI extracts ingredients</li>
             <li>• <span class="text-green-400 font-mono">Ingredients to make hummus</span> - AI suggests items</li>
           </ul>
+          <button id="fillExampleButton" type="button" class="mt-3 text-sm text-blue-300 hover:text-blue-200 underline">
+            Fill in “add apples”
+          </button>
         </div>
 
         <form id="commandForm" class="space-y-4">
@@ -126,6 +129,11 @@
 
     const commandForm = document.getElementById('commandForm');
     const commandInput = document.getElementById('commandInput');
+    const fillExampleButton = document.getElementById('fillExampleButton');
+    fillExampleButton.addEventListener('click', () => {
+      commandInput.value = 'add apples';
+      commandInput.focus();
+    });
     const shoppingList = document.getElementById('shoppingList');
     const clearButton = document.getElementById('clearButton');
     const connectionStatus = document.getElementById('connectionStatus');
@@ -356,4 +364,3 @@
   </script>
 </body>
 </html>
-
